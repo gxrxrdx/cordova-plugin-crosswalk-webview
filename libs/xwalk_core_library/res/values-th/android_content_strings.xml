@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-<string name="actionbar_share">"แบ่งปัน"</string>
+<string name="actionbar_share">"แชร์"</string>
 <string name="actionbar_web_search">"ค้นเว็บ"</string>
 <string name="accessibility_content_view">"มุมมองเว็บ"</string>
 <string name="date_picker_dialog_title">"ตั้งวันที่"</string>
