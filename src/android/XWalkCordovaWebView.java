@@ -27,6 +27,7 @@ import org.apache.cordova.CordovaBridge;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPreferences;
 import org.apache.cordova.CordovaResourceApi;
+import org.apache.cordova.CordovaUriHelper;
 import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.LOG;
 import org.apache.cordova.NativeToJsMessageQueue;
@@ -71,6 +72,7 @@ public class XWalkCordovaWebView implements CordovaWebView {
     ArrayList<Integer> boundKeyCodes = new ArrayList<Integer>();
 
     private PluginManager pluginManager;
+    private CordovaUriHelper helper;
     private BroadcastReceiver receiver;
     protected XWalkCordovaView webview;
 
@@ -90,8 +92,6 @@ public class XWalkCordovaWebView implements CordovaWebView {
     private CustomViewCallback mCustomViewCallback;
 
     private CordovaResourceApi resourceApi;
-    private Whitelist internalWhitelist;
-    private Whitelist externalWhitelist;
     private CordovaPreferences preferences;
     // The URL passed to loadUrl(), not necessarily the URL of the current page.
     private String loadedUrl;
@@ -113,19 +113,17 @@ public class XWalkCordovaWebView implements CordovaWebView {
     // Use two-phase init so that the control will work with XML layouts.
     @Override
     public void init(CordovaInterface cordova, List<PluginEntry> pluginEntries,
-            Whitelist internalWhitelist, Whitelist externalWhitelist,
             CordovaPreferences preferences) {
         if (this.cordova != null) {
             throw new IllegalStateException();
         }
         this.cordova = cordova;
-        this.internalWhitelist = internalWhitelist;
-        this.externalWhitelist = externalWhitelist;
         this.preferences = preferences;
 
+        helper = new CordovaUriHelper(cordova, this);
         pluginManager = new PluginManager(this, this.cordova, pluginEntries);
         resourceApi = new CordovaResourceApi(webview.getContext(), pluginManager);
-        bridge = new CordovaBridge(pluginManager, new NativeToJsMessageQueue(this, cordova));
+        bridge = new CordovaBridge(pluginManager, new NativeToJsMessageQueue(this, cordova), helper);
         pluginManager.addService("App", "org.apache.cordova.CoreAndroid");
         initWebViewSettings();
 
@@ -218,7 +216,7 @@ public class XWalkCordovaWebView implements CordovaWebView {
             public void run() {
                 Thread thread = new Thread(timeoutCheck);
                 thread.start();
-                if (url.startsWith("file://") || url.startsWith("javascript:") || internalWhitelist.isUrlWhiteListed(url)) {
+                if (url.startsWith("javascript:") || helper.shouldAllowNavigation(url)) {
                     webview.load(url, null);
                 }
             }
@@ -318,7 +316,7 @@ public class XWalkCordovaWebView implements CordovaWebView {
         if (!openExternal) {
 
             // Make sure url is in whitelist
-            if (url.startsWith("file://") || internalWhitelist.isUrlWhiteListed(url)) {
+            if (helper.shouldAllowNavigation(url)) {
                 // TODO: What about params?
                 // Load new URL
                 this.loadUrlIntoView(url, true);
@@ -580,16 +578,6 @@ public class XWalkCordovaWebView implements CordovaWebView {
     @Override
     public String getUrl() {
         return this.webview.getUrl();
-    }
-
-    @Override
-    public Whitelist getWhitelist() {
-        return internalWhitelist;
-    }
-
-    @Override
-    public Whitelist getExternalWhitelist() {
-        return externalWhitelist;
     }
 
     @Override

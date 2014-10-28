@@ -212,7 +212,7 @@ public class XWalkCordovaResourceClient extends XWalkResourceClient {
     public WebResourceResponse shouldInterceptLoadRequest(XWalkView view, String url) {
         try {
             // Check the against the white-list.
-            if ((url.startsWith("http:") || url.startsWith("https:")) && !appView.getWhitelist().isUrlWhiteListed(url)) {
+            if (!helper.shouldAllowRequest(url)) {
                 LOG.w(TAG, "URL blocked by whitelist: " + url);
                 // Results in a 404.
                 return new WebResourceResponse("text/plain", "UTF-8", null);
