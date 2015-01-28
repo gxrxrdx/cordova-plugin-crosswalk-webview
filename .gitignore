@@ -1,2 +1,3 @@
 /libs/xwalk_core_library/build/
 /libs/xwalk_core_library/build.gradle
+*.iml
