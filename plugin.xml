@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-        id="cordova-plugin-crosswalk-webview"
+        id="com.berthnipub.crosswalk.engine"
         version="1.4.0-dev">
 
     <name>Crosswalk WebView Engine</name>
