@@ -4,12 +4,11 @@
         id="com.berthni.crosswalk.engine"
         version="1.4.0">
 
-    <name>Crosswalk WebView Engine</name>
+    <name>Crosswalk WebView Engine pgb adapt</name>
     <description>Changes the default WebView to CrossWalk</description>
     <license>Apache 2.0</license>
     <keywords>cordova,chromium,crosswalk,webview</keywords>
-    <repo>https://github.com/crosswalk-project/cordova-plugin-crosswalk-webview</repo>
-    <issue>https://crosswalk-project.org/jira</issue>
+    <repo>https://github.com/berthnipub/cordova-plugin-crosswalk-webview.git</repo>
 
     <engines>
         <engine name="cordova-android" version=">=4"/>
