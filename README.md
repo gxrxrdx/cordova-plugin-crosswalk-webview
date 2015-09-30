@@ -1,4 +1,11 @@
-# cordova-plugin-crosswalk-webview
+# cordova-plugin-crosswalk-webview without pull-to-refresh for Phonegap Build
+
+### PGB Instructions
+Add this line to your config.xml file:
+```
+<gap:plugin name="cordova-plugin-crosswalk-webview-pgb-adapt" source="npm" version="1.4.0-dev-4"/>
+```
+
 
 Makes your Cordova application use the [Crosswalk WebView](https://crosswalk-project.org/)
 instead of the System WebView. Requires cordova-android 4.0 or greater.
@@ -91,6 +98,10 @@ Note that if you want to specify the Crosswalk version when using shared mode, y
 
 
 ### Release Notes
+
+#### 1.4.0-dev4
+* Based on Crosswalk v16.45.417
+* pull-down-to-refresh is now REALLY disabled by default for Phonegap Build
 
 #### 1.3.0 (August 28, 2015)
 * Crosswalk variables can be configured as an option via CLI
