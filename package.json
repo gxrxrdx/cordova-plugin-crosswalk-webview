@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-crosswalk-webview-pgb-adapt",
-  "version": "1.4.0-dev-4",
+  "version": "1.4.0-dev-5",
   "description": "Changes the default WebView to CrossWalk",
   "cordova": {
     "id": "cordova-plugin-crosswalk-webview-pgb-adapt",
