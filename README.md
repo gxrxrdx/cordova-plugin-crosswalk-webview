@@ -100,9 +100,9 @@ Add this line to your config.xml file:
 
 ### Release Notes
 
-#### 1.4.0-dev-5 (fork from cordova-plugin-crosswalk-webview 1.4.0-dev)
+#### 1.4.0-dev-10 (fork from cordova-plugin-crosswalk-webview 1.4.0-dev)
 * PhoneGap Build compatible (tested with PGB v5.2.0)
-* Based on Crosswalk v16.45.417
+* Based on Crosswalk v15.44.384
 * Pull-down-to-refresh is now REALLY disabled by default for PhoneGap Build
 * Removed ACCESS_NETWORK_STATE and ACCESS_WIFI_STATE permissions
 
